@@ -1,0 +1,86 @@
+-- Gagcheatcode (Owner Version)
+-- Original code by iyanniee, modified by owner with extra features
+
+-- Load UI Library
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Orion/main/source"))()
+local Window = Library:MakeWindow({Name = "GaG-Hub (Owner Edition)", HidePremium = false, SaveConfig = true, ConfigFolder = "GagConfig"})
+
+-- MAIN TAB
+local MainTab = Window:MakeTab({Name = "Main", Icon = "rbxassetid://4483345998", PremiumOnly = false})
+
+MainTab:AddButton({
+    Name = "Get All Tools",
+    Callback = function()
+        for i,v in pairs(game:GetService("Workspace"):GetDescendants()) do
+            if v:IsA("Tool") then
+                firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Handle, 0)
+                wait()
+                firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Handle, 1)
+            end
+        end
+    end
+})
+
+-- ▼▼▼ Spawn All Pets ▼▼▼
+MainTab:AddButton({
+    Name = "Spawn All Pets",
+    Callback = function()
+        local pets = {
+            "Huge Raptor", "Dragon Fly", "Frost Raptor", "Giraffe", "Watermelon", "Apple",
+            "Candy Blossom", "Pineapple", "Banana", "Huge Spider", "Big Ladybug", "Mega Carrot"
+        }
+        for _, pet in pairs(pets) do
+            game:GetService("ReplicatedStorage").Remotes.SpawnPet:FireServer(pet)
+        end
+    end
+})
+
+-- ▼▼▼ Spawn All Eggs ▼▼▼
+MainTab:AddButton({
+    Name = "Spawn All Eggs",
+    Callback = function()
+        local eggs = {
+            "Jungle Egg", "Sky Egg", "Frozen Egg", "Fruit Egg", "Forest Egg", "Dark Egg",
+            "Bug Egg", "Starter Egg", "Huge Egg", "Premium Egg"
+        }
+        for _, egg in pairs(eggs) do
+            game:GetService("ReplicatedStorage").Remotes.SpawnEgg:FireServer(egg)
+        end
+    end
+})
+
+-- LOCAL PLAYER TAB
+local PlayerTab = Window:MakeTab({Name = "Player", Icon = "rbxassetid://4483345998", PremiumOnly = false})
+PlayerTab:AddSlider({
+    Name = "WalkSpeed",
+    Min = 16,
+    Max = 500,
+    Default = 16,
+    Color = Color3.fromRGB(255,255,255),
+    Increment = 1,
+    ValueName = "Speed",
+    Callback = function(Value)
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
+    end
+})
+
+PlayerTab:AddSlider({
+    Name = "JumpPower",
+    Min = 50,
+    Max = 300,
+    Default = 50,
+    Color = Color3.fromRGB(255,255,255),
+    Increment = 1,
+    ValueName = "Jump",
+    Callback = function(Value)
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
+    end
+})
+
+-- CREDITS TAB
+local CreditTab = Window:MakeTab({Name = "Credits", Icon = "rbxassetid://4483345998", PremiumOnly = false})
+CreditTab:AddParagraph("Script by", "YourUsernameHere (Owner)")
+CreditTab:AddParagraph("Base by", "iyanniee")
+
+-- UI Toggle
+Library:Init()
